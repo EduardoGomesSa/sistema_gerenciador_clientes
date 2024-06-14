@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\CheckRole;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -14,6 +12,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/validate-token', [AuthController::class, 'validateToken']);
 
     Route::put('/users', [UserController::class, 'update']);
+    Route::get('/users/getById', [UserController::class, 'getById']);
     
     // Route::put('/users', [UserController::class, 'update']);
     // Route::delete('/users', [UserController::class, 'destroy'])->middleware(CheckRole::class);

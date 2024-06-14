@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserDeleteRequest;
+use App\Http\Requests\UserGetByIdRequest;
 use App\Http\Requests\UserGetNameRequest;
 use App\Http\Requests\UserGetRegistrationDateRequest;
 use App\Http\Requests\UserRequest;
@@ -16,6 +17,12 @@ class UserController extends Controller
 
     public function __construct(User $user) {
         $this->user = $user;
+    }
+
+    public function getById(UserGetByIdRequest $request){
+        return new CustomerResource(
+            $this->user->find($request->id),
+        );
     }
 
     public function getByName(UserGetNameRequest $request){
