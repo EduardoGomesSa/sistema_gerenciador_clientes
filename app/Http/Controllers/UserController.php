@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserDeleteRequest;
 use App\Http\Requests\UserGetNameRequest;
+use App\Http\Requests\UserGetRegistrationDateRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\CustomerResource;
@@ -20,6 +21,12 @@ class UserController extends Controller
     public function getByName(UserGetNameRequest $request){
         return CustomerResource::collection(
             $this->user->where('name', 'LIKE', "$request->name%")->get()
+        );
+    }
+
+    public function getByRegistrationDate(UserGetRegistrationDateRequest $request){
+        return CustomerResource::collection(
+            $this->user->where('registration_date', $request->registration_date)->get()
         );
     }
 

@@ -12,3 +12,4 @@ Route::post('/users', [UserController::class, 'store']);
 Route::put('/users', [UserController::class, 'update']);
 Route::delete('/users', [UserController::class, 'destroy']);
 Route::get('/users/getbyname', [UserController::class, 'getByName']);
+Route::get('/users/getByRegistrationDate', [UserController::class, 'getByRegistrationDate']);
