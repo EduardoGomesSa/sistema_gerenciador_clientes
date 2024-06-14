@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserDeleteRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
@@ -38,5 +39,17 @@ class UserController extends Controller
         if(!$userUpdated) return response(['error'=>'usuario nao foi atualizado'])->setStatusCode(401);
 
         return response(['message'=>'usuario atualizado com sucesso'])->setStatusCode(200);
+    }
+
+    public function destroy(UserDeleteRequest $request){
+        $userExist = $this->user->find($request->id);
+
+        if(!$userExist) return response(['error'=>'usuario nao existe'])->setStatusCode(404);
+
+        $userDeleted = $userExist->delete();
+
+        if(!$userDeleted) return response(['error'=>'usuario nao foi excluido'])->setStatusCode(401);
+
+        return response(['message'=>'usuario excluido com sucesso'])->setStatusCode(200);
     }
 }
