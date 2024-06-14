@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -26,5 +26,17 @@ class UserController extends Controller
         $userCreated->address()->create($request->address);
 
         return response(['message'=>'usuario e endereco criado com sucesso'])->setStatusCode(201);
+    }
+
+    public function update(UserUpdateRequest $request){
+        $userExist = $this->user->find($request->id);
+
+        if(!$userExist) return response(['error'=>'usuario nao existe'])->setStatusCode(404);
+
+        $userUpdated = $userExist->update($request->all());
+
+        if(!$userUpdated) return response(['error'=>'usuario nao foi atualizado'])->setStatusCode(401);
+
+        return response(['message'=>'usuario atualizado com sucesso'])->setStatusCode(200);
     }
 }

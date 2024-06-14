@@ -23,11 +23,11 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'id'=>'required|numeric',
-            'name'=>'sometimes|required|string',
-            'cpf'=>'sometimes|required|string|unique:users,cpf',
-            'email' => 'sometimes|required|email|unique:users,email',
-            'password'=>'sometimes|required|string',
-            'birth_date'=>'sometimes|required|date',
+            'name'=>'sometimes|string',
+            'cpf'=>'sometimes|string|unique:users,cpf',
+            'birth_date'=>'sometimes|date',
+            'email' => 'sometimes|email|unique:users,email',
+            'password'=>'sometimes|string',
         ];
     }
 }
