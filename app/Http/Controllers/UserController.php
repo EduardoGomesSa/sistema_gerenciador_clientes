@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserDeleteRequest;
+use App\Http\Requests\UserGetNameRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\CustomerResource;
 use App\Models\User;
 
 class UserController extends Controller
@@ -13,6 +15,12 @@ class UserController extends Controller
 
     public function __construct(User $user) {
         $this->user = $user;
+    }
+
+    public function getByName(UserGetNameRequest $request){
+        return CustomerResource::collection(
+            $this->user->where('name', 'LIKE', "$request->name%")->get()
+        );
     }
 
     public function store(UserRequest $request){
