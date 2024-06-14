@@ -22,9 +22,4 @@ class CustomerResource extends JsonResource
             'registration_date' => Carbon::parse($this->registration_date)->format('d/m/Y'),
         ];
     }
-
-    public function withResponse($request, $response)
-    {
-        $response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
-    }
 }
