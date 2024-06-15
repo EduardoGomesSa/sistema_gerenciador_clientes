@@ -14,11 +14,9 @@ use App\Services\UserService;
 
 class UserController extends Controller
 {
-    private $user;
     private $service;
 
-    public function __construct(User $user, UserService $service) {
-        $this->user = $user;
+    public function __construct(UserService $service) {
         $this->service = $service;
     }
 

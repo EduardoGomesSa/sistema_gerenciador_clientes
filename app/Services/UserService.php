@@ -54,19 +54,6 @@ class UserService
             $this->repository->getByRegistrationDate($request->registration_date)
         );
     }
-    // public function getByName(UserGetNameRequest $request)
-    // {
-    //     return CustomerResource::collection(
-    //         $this->user->where('name', 'LIKE', "$request->name%")->get()
-    //     );
-    // }
-
-    // public function getByRegistrationDate(UserGetRegistrationDateRequest $request)
-    // {
-    //     return CustomerResource::collection(
-    //         $this->user->where('registration_date', $request->registration_date)->get()
-    //     );
-    // }
 
     public function store(UserRequest $request)
     {
@@ -81,13 +68,21 @@ class UserService
 
     public function update(UserUpdateRequest $request)
     {
-        $userExist = $this->repository->userExistById($request['id']);
+        $userAuthenticated = auth()->user();
 
-        if (!$userExist) return false;
+        if($userAuthenticated->role == 'customer'){
+            if($userAuthenticated->id != $request['id']){
+                $user = $userAuthenticated;
+            }
+        } else {
+            $userExist = $this->repository->userExistById($request['id']);
 
-        $userReturned = $this->repository->getById($request['id']);
+            if (!$userExist) return false;
 
-        $userToUpdate = $this->convertToUpdate($request, $userReturned);
+            $user = $this->repository->getById($request['id']);
+        }
+
+        $userToUpdate = $this->convertToUpdate($request, $user);
 
         $userUpdated = $this->repository->update($userToUpdate);
 
