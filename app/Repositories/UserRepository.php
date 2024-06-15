@@ -57,4 +57,14 @@ class UserRepository
 
         return false;
     }
+
+    public function destroy($id) : bool{
+        $user = $this->getById($id);
+
+        $userDeleted = $user->delete();
+
+        if($userDeleted > 0) return true;
+
+        return false;
+    }
 }

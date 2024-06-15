@@ -77,13 +77,9 @@ class UserService
 
         if (!$userExist) return false;
 
-        $user = $this->user->find($request['id']);
+        $userDeleted = $this->repository->destroy($request['id']);
 
-        $userDeleted = $user->delete();
-
-        if ($userDeleted > 0) return true;
-
-        return false;
+        return $userDeleted;
     }
 
     private function convertToUpdate(UserUpdateRequest $request, User $user) : User{
