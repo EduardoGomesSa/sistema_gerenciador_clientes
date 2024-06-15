@@ -132,20 +132,3 @@ class UserService
         return $user;
     }
 }
-
-
-// "name": "manager7",
-//         "email": "manager8@gmail.com",
-//         "password": "manager",
-//         "cpf": "123.456.789-13",
-//         "birth_date": "1990-01-02",
-//         "registration_date": "2024-05-13",
-//         "address": {
-//             "cep": "12345-678",
-//             "state": "SP",
-//             "city": "São Paulo",
-//             "neighborhood": "Centro",
-//             "street": "Rua das Flores",
-//             "number": "123",
-//             "complement": "Apto 45"
-//         }
