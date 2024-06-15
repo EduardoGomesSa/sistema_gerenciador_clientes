@@ -15,12 +15,10 @@ use App\Repositories\UserRepository;
 
 class UserService
 {
-    private $user;
     private $repository;
 
-    public function __construct(User $user, UserRepository $repository)
+    public function __construct(UserRepository $repository)
     {
-        $this->user = $user;
         $this->repository = $repository;
     }
 
