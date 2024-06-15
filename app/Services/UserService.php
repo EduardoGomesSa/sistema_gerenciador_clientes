@@ -26,7 +26,16 @@ class UserService
 
     public function getById(UserGetByIdRequest $request)
     {
-        $user =  $this->repository->getById($request->id);
+        $userAuthenticated = auth()->user();
+
+        if($userAuthenticated->role == 'customer'){
+            if($userAuthenticated->id != $request['id']){
+                $user =  $this->repository->getById($userAuthenticated->id);
+            }
+        } else {
+            $user =  $this->repository->getById($request->id);
+        }
+        
         if(!$user) return null;
 
         return new CustomerResource($user);
