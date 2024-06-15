@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use DateTime;
 
 class UserRepository
 {
@@ -31,6 +32,17 @@ class UserRepository
     {
         return $this->user->find($id);
     }
+
+    public function getByName(string $name)
+    {
+        return $this->user->where('name', 'LIKE', "$name%")->get();
+    }
+
+    public function getByRegistrationDate(string $date)
+    {
+        return $this->user->where('registration_date', $date)->get();
+    }
+
 
     public function store(User $user): User
     {

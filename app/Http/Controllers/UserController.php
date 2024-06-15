@@ -23,7 +23,11 @@ class UserController extends Controller
     }
 
     public function getById(UserGetByIdRequest $request){
-        return $this->service->getById($request);
+        $userFounded = $this->service->getById($request);
+
+        if(!$userFounded) return response(['error'=>'usuario nao foi encontrado'], 404);
+
+        return $userFounded;
     }
 
     public function getByName(UserGetNameRequest $request){

@@ -26,24 +26,38 @@ class UserService
 
     public function getById(UserGetByIdRequest $request)
     {
-        return new CustomerResource(
-            $this->repository->getById($request->id),
-        );
+        $user =  $this->repository->getById($request->id);
+        if(!$user) return null;
+
+        return new CustomerResource($user);
     }
 
     public function getByName(UserGetNameRequest $request)
     {
         return CustomerResource::collection(
-            $this->user->where('name', 'LIKE', "$request->name%")->get()
+            $this->repository->getByName($request['name'])
         );
     }
 
     public function getByRegistrationDate(UserGetRegistrationDateRequest $request)
     {
         return CustomerResource::collection(
-            $this->user->where('registration_date', $request->registration_date)->get()
+            $this->repository->getByRegistrationDate($request->registration_date)
         );
     }
+    // public function getByName(UserGetNameRequest $request)
+    // {
+    //     return CustomerResource::collection(
+    //         $this->user->where('name', 'LIKE', "$request->name%")->get()
+    //     );
+    // }
+
+    // public function getByRegistrationDate(UserGetRegistrationDateRequest $request)
+    // {
+    //     return CustomerResource::collection(
+    //         $this->user->where('registration_date', $request->registration_date)->get()
+    //     );
+    // }
 
     public function store(UserRequest $request)
     {
