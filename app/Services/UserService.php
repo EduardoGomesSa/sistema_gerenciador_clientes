@@ -56,36 +56,20 @@ class UserService
         return $userCreated;
     }
 
-    
     public function update(UserUpdateRequest $request)
     {
         $userExist = $this->repository->userExistById($request['id']);
 
         if (!$userExist) return false;
 
-        $user = $this->user->find($request['id']);
+        $userReturned = $this->repository->getById($request['id']);
 
-        $userUpdated = $user->update($request->all());
+        $userToUpdate = $this->convertToUpdate($request, $userReturned);
 
-        if ($userUpdated > 0) return true;
+        $userUpdated = $this->repository->update($userToUpdate);
 
-        return false;
+        return $userUpdated;
     }
-
-    // public function update(UserUpdateRequest $request)
-    // {
-    //     $userExist = $this->repository->userExistById($request['id']);
-
-    //     if (!$userExist) return false;
-
-    //     $userReturned = $this->repository->getById($request['id']);
-
-    //     $userToUpdate = $this->convertToUpdate($request, $userReturned);
-
-    //     $userUpdated = $this->repository->update($userToUpdate);
-
-    //     return $userUpdated;
-    // }
 
     public function destroy(UserDeleteRequest $request)
     {
@@ -102,29 +86,29 @@ class UserService
         return false;
     }
 
-    // private function convertToUpdate(UserUpdateRequest $request, User $user) : User{
-    //     if ($request->filled('name')) {
-    //         $user->name = $request->name;
-    //     }
+    private function convertToUpdate(UserUpdateRequest $request, User $user) : User{
+        if ($request->filled('name')) {
+            $user->name = $request->name;
+        }
 
-    //     if ($request->filled('email')) {
-    //         $user->email = $request->email;
-    //     }
+        if ($request->filled('email')) {
+            $user->email = $request->email;
+        }
 
-    //     if ($request->filled('password')) {
-    //         $user->password = bcrypt($request->password);
-    //     }
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
 
-    //     if ($request->filled('cpf')) {
-    //         $user->cpf = $request->cpf;
-    //     }
+        if ($request->filled('cpf')) {
+            $user->cpf = $request->cpf;
+        }
 
-    //     if ($request->filled('birth_date')) {
-    //         $user->birth_date = $request->birth_date;
-    //     }
+        if ($request->filled('birth_date')) {
+            $user->birth_date = $request->birth_date;
+        }
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     private function convertToCreate(UserRequest $request): User
     {

@@ -50,11 +50,11 @@ class UserRepository
         return $userCreated;
     }
 
-    // public function update(User $user) : bool {
-    //     $userUpdated = $user->save();
+    public function update(User $user) : bool {
+        $userUpdated = $user->save();
 
-    //     if($userUpdated) return true;
+        if($userUpdated) return true;
 
-    //     return false;
-    // }
+        return false;
+    }
 }
