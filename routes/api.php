@@ -17,7 +17,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Route::put('/users', [UserController::class, 'update']);
     // Route::delete('/users', [UserController::class, 'destroy'])->middleware(CheckRole::class);
 
-    Route::middleware(['role:manager'])->group(function (){
+    Route::middleware(['role:manager,admin'])->group(function (){
         Route::post('/users', [UserController::class, 'store']);
         
         Route::delete('/users', [UserController::class, 'destroy']);
