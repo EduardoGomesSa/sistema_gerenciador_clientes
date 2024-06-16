@@ -28,6 +28,7 @@ class UserUpdateRequest extends FormRequest
             'birth_date'=>'sometimes|date',
             'email' => 'sometimes|email|unique:users,email',
             'password'=>'sometimes|string',
+            'path_photo' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 }

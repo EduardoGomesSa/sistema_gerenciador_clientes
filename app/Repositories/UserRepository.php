@@ -53,6 +53,7 @@ class UserRepository
             'cpf' => $user->cpf,
             'birth_date' => $user->birth_date,
             'registration_date' => $user->registration_date,
+            'path_photo' => $user->path_photo,
         ]);
 
         if (!$userCreated) return null;

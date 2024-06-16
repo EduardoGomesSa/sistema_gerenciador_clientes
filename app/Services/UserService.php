@@ -9,6 +9,7 @@ use App\Http\Requests\UserGetRegistrationDateRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\CustomerResource;
+use App\Http\Resources\UserResource;
 use App\Models\Address;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -61,7 +62,9 @@ class UserService
 
         if (!$userCreated) return null;
 
-        return $userCreated;
+        $resource = new UserResource($userCreated);
+
+        return $resource;
     }
 
     public function update(UserUpdateRequest $request)
@@ -119,6 +122,12 @@ class UserService
             $user->birth_date = $request->birth_date;
         }
 
+        if ($request->filled('path_photo')) {
+            $this->photoDelete(strval($user->path_photo));
+
+            $user->path_photo = $this->photoPath($request);
+        }
+
         return $user;
     }
 
@@ -141,10 +150,29 @@ class UserService
             'cpf' => $request->cpf,
             'birth_date' => $request->birth_date,
             'registration_date' => $request->registration_date,
+            'path_photo' => $this->photoPath($request),
         ]);
 
         $user->setRelation('address', $address);
 
         return $user;
+    }
+
+    private function photoPath($request) {
+        if(!$request->path_photo) return null;
+
+        $image = $request->file('path_photo');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('images'), $imageName);
+
+        $imagePath = 'images/'.$imageName;
+
+        return $imagePath;
+    }
+
+    private function photoDelete(string $path){
+        if(file_exists($path)){
+            unlink($path);
+        }
     }
 }

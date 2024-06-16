@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'password'=>'required|string',
             'birth_date'=>'required|date',
             'registration_date'=>'required|date',
+            'path_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'address.cep' => 'required|string|max:9',
             'address.state' => 'required|string|max:2',
             'address.city' => 'required|string|max:255',

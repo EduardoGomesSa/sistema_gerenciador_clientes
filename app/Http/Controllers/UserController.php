@@ -41,7 +41,7 @@ class UserController extends Controller
 
         if(!$userCreated) return response(['error'=>'nao foi possivel criar o usuario'])->setStatusCode(401);
 
-        return response(['message'=>'usuario e endereco criado com sucesso'])->setStatusCode(201);
+        return $userCreated->response()->setStatusCode(201);
     }
 
     public function update(UserUpdateRequest $request){
