@@ -10,7 +10,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/validate-token', [AuthController::class, 'validateToken']);
 
-    Route::put('/users', [UserController::class, 'update']);
+    Route::post('/users/update', [UserController::class, 'update']);
     Route::get('/users/getById', [UserController::class, 'getById']);
 
     Route::middleware(['role:manager,admin'])->group(function (){

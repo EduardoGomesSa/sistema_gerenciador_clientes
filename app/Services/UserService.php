@@ -62,7 +62,7 @@ class UserService
 
         if (!$userCreated) return null;
 
-        $resource = new UserResource($userCreated);
+        $resource = new CustomerResource($userCreated);
 
         return $resource;
     }
@@ -122,7 +122,7 @@ class UserService
             $user->birth_date = $request->birth_date;
         }
 
-        if ($request->filled('path_photo')) {
+        if ($request->hasFile('path_photo')) {
             $this->photoDelete(strval($user->path_photo));
 
             $user->path_photo = $this->photoPath($request);
