@@ -99,7 +99,7 @@ class UserService
 
         $this->photoDelete(strval($user->path_photo));
 
-        $userDeleted = $this->repository->destroy($request['id']);
+        $userDeleted = $this->repository->destroy($user);
 
         return $userDeleted;
     }
