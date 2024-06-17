@@ -25,11 +25,11 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             "id"=>'required|numeric',
-            'name'=>'sometimes|string',
-            'cpf'=>'sometimes|string|unique:users,cpf',
+            'name'=>'sometimes|string|max:20',
+            'cpf'=>'sometimes|regex:/^\d+$/|max:11|min:11|unique:users,cpf',
             'birth_date'=>'sometimes|date',
-            'email' => 'sometimes|email|unique:users,email',
-            'password'=>'sometimes|string',
+            'email' => 'sometimes|email|max:25|unique:users,email',
+            'password'=>'sometimes|string|min:5',
             'path_photo' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }

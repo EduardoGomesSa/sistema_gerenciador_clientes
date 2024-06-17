@@ -24,20 +24,20 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string',
-            'cpf'=>'required|string|unique:users,cpf',
-            'email' => 'required|email|unique:users,email',
-            'password'=>'required|string',
+            'name'=>'required|string|max:20',
+            'cpf'=>'required|regex:/^\d+$/|min:11|max:11|unique:users,cpf',
+            'email' => 'required|email|max:25|unique:users,email',
+            'password'=>'required|string|min:5',
             'birth_date'=>'required|date',
             'registration_date'=>'required|date',
             'path_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'address.cep' => 'required|string|max:9',
             'address.state' => 'required|string|max:2',
-            'address.city' => 'required|string|max:255',
-            'address.neighborhood' => 'required|string|max:255',
-            'address.street' => 'required|string|max:255',
-            'address.number' => 'required|string|max:10',
-            'address.complement' => 'nullable|string|max:255',
+            'address.city' => 'required|string|max:30',
+            'address.neighborhood' => 'required|string|max:20',
+            'address.street' => 'required|string|max:20',
+            'address.number' => 'required|string|max:5',
+            'address.complement' => 'nullable|string|max:30',
         ];
     }
 
