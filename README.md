@@ -60,7 +60,7 @@ post ``/api/users`` Realiza a criação de novos usuários no sistema
     }
 }
 ```
-:construction:Obs: Para adicionar uma imagem inclua o campo ``path_photo`` e mude o modo de envio para Multpart Form
+ℹ️ Obs: Para adicionar uma imagem inclua o campo ``path_photo`` e mude o modo de envio para Multpart Form
 
 post ``/api/users`` Realiza a atualização de um usuário do sistema 
 ```bash
@@ -73,7 +73,7 @@ post ``/api/users`` Realiza a atualização de um usuário do sistema
     "password":"nova.senha"
 }
 ```
-:construction:Obs: Para adicionar uma imagem inclua o campo ``path_photo`` e mude o modo de envio para Multpart Form
+ℹ️ Obs: Para adicionar uma imagem inclua o campo ``path_photo`` e mude o modo de envio para Multpart Form
 
 delete ``/api/users`` Realiza a exclusão de um usuário do sistema 
 ```bash
@@ -99,3 +99,10 @@ get ``/api/users/getById`` Realiza a busca de usuários do sistema pelo id
     "id":1
 }
 ```
+
+## Arquivos disponíveis 
+- Json contendo os logins dos usuários já cadastrados
+- Export do insomnia contendo os endpoints
+- Export do banco de dados
+  
+  ℹ️ Todos os estão salvos na pasta ``others`` localizada na raiz do projeto
