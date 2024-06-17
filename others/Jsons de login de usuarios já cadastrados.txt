@@ -1,0 +1,34 @@
+//Usuario adminstrador
+{
+   "email": "admin@gmail.com",
+   "password": "admin"
+}
+
+//Usuario gerente
+
+{
+  "email": "manager@gmail.com",
+  "password": "manager"
+}
+
+//Usuarios clientes
+
+{
+   "email": "customer@gmail.com",
+   "password": "customer"
+}
+
+{
+  "email": "david.luis@gmail.com",
+  "password": "david"
+}
+
+{
+  "email": "amanda.waller@gmail.com",
+  "password": "amanda"
+}
+
+{
+  "email": "cristina@gmail.com",
+  "password": "cristina"
+}
