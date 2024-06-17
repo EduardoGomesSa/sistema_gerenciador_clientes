@@ -17,6 +17,10 @@ Instala as dependências e pacotes do projeto
 ```bash
   composer install
 ```
+Renomeie o arquivo .env.example para ``.env`` e gere uma nova chave da API
+```bash
+  php artisan key:generate
+```
 Executa as migrations, criando ou atualizando o banco e tabelas no banco de dados 
 ```bash
   php artisan migrate
