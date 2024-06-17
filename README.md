@@ -1,59 +1,101 @@
-#Sistema para Gerenciamento de Clientes
+# Sistema para Gerenciamento de Clientes
 
 ## Sobre o projeto
 
 Esse sistema foi projeto para realizar as operações CRUDs básicas sobre os usuários, tais como criação, atualização, exclusão e leitura de dados. Para um melhor controle foi definido o acesso por nível de usuário a algumas funcionalidades, que exigem mais cautela, tais como alterações de dados na base. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tecnologias e padrões utilizados
+- ``Laravel 11``
+- ``Eloquent ORM``
+- ``PHP``
+- ``MySQL``
+- ``MVC``
+- ``Insomnia``
+- ``PHPMyAdmin``
+## Comandos para inicialização
+Instala as dependências e pacotes do projeto
+```bash
+  composer install
+```
+Renomeie o arquivo .env.example para ``.env`` e gere uma nova chave da API
+```bash
+  php artisan key:generate
+```
+Executa as migrations, criando ou atualizando o banco e tabelas no banco de dados 
+```bash
+  php artisan migrate
+```
+Executa o projeto, tornando-o acessível
+```bash
+  php artisan serve
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Endpoints
+post `` /api/login`` Realiza o login no sistema, retornando um token para acesso a outras rotas 
+```bash
+{
+    "email": "exemplo@exemplo.com",
+    "password": "exemplo"
+}
+```
+post ``/api/users`` Realiza a criação de novos usuários no sistema 
+```bash
+{
+    {
+        "name": "Exemplo",
+        "email": "example@example.com",
+        "password": "example",
+        "cpf": "00000000000",
+        "birth_date": "1991-04-08",
+        "registration_date": "2024-03-13",
+        "address": {
+            "cep": "65800000",
+            "state": "Ma",
+            "city": "Cidade",
+            "neighborhood": "Bairro",
+            "street": "Rua X",
+            "number": "111",
+            "complement": "Complemento do endereco"
+        }
+    }
+}
+```
+:construction:Obs: Para adicionar uma imagem inclua o campo ``path_photo`` e mude o modo de envio para Multpart Form
 
-## Learning Laravel
+post ``/api/users`` Realiza a atualização de um usuário do sistema 
+```bash
+{
+    "id": "1",
+    "name": "Novo Nome",
+    "cpf": "00000000001",
+    "email":"novo.email@novoemail.com",
+    "birth_date": "2000-12-04",
+    "password":"nova.senha"
+}
+```
+:construction:Obs: Para adicionar uma imagem inclua o campo ``path_photo`` e mude o modo de envio para Multpart Form
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+delete ``/api/users`` Realiza a exclusão de um usuário do sistema 
+```bash
+{
+    "id":1
+}
+```
+get ``/api/users/getbyname`` Realiza a busca de usuários do sistema pelo nome 
+```bash
+{
+    "name": "Nome usuario"
+}
+```
+get ``/api/users/getByRegistrationDate`` Realiza a busca de usuários do sistema pela data de cadastro dos mesmos 
+```bash
+{
+    "registration_date": "2024-03-13"
+}
+```
+get ``/api/users/getById`` Realiza a busca de usuários do sistema pelo id 
+```bash
+{
+    "id":1
+}
+```
