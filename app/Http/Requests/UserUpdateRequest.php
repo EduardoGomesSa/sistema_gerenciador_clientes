@@ -38,19 +38,9 @@ class UserUpdateRequest extends FormRequest
     {
         $errors = $validator->errors();
 
-        // Incluir os dados recebidos na resposta de erro
-        $response = response()->json([
-            'errors' => $errors,
-            'data' => $this->all(), // Aqui você obtém todos os dados recebidos na requisição
-        ], 422);
-
-        throw new HttpResponseException($response);
-        
-        // $errors = $validator->errors();
-
-        // throw new HttpResponseException(
-        //     response()->json(['errors' => $errors], 422)
-        // );
+        throw new HttpResponseException(
+            response()->json(['errors' => $errors], 422)
+        );
     }
 
     

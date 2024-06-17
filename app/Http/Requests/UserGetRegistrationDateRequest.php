@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserGetRegistrationDateRequest extends FormRequest
 {
@@ -24,5 +26,14 @@ class UserGetRegistrationDateRequest extends FormRequest
         return [
             'registration_date'=>'required|date',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors();
+
+        throw new HttpResponseException(
+            response()->json(['errors' => $errors], 422)
+        );
     }
 }
