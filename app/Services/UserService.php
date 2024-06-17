@@ -132,7 +132,7 @@ class UserService
     }
 
     private function convertToCreate(UserRequest $request): User
-    {
+    {   
         $address = new Address([
             'cep' => $request->address['cep'],
             'state' => $request->address['state'],
@@ -140,8 +140,11 @@ class UserService
             'neighborhood' => $request->address['neighborhood'],
             'street' => $request->address['street'],
             'number' => $request->address['number'],
-            'complement' => $request->address['complement'],
         ]);
+
+        if ($request->filled('complement')) {
+            $address->complement = $request->address['complement'];
+        }
 
         $user = new User([
             'name' => $request->name,
