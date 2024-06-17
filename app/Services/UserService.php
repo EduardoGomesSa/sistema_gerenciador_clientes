@@ -9,7 +9,6 @@ use App\Http\Requests\UserGetRegistrationDateRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\CustomerResource;
-use App\Http\Resources\UserResource;
 use App\Models\Address;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -95,6 +94,10 @@ class UserService
         $userExist = $this->repository->userExistById($request['id']);
 
         if (!$userExist) return false;
+
+        $user = $this->repository->getById($request['id']);
+
+        $this->photoDelete(strval($user->path_photo));
 
         $userDeleted = $this->repository->destroy($request['id']);
 
